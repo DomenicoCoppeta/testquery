@@ -1,15 +1,18 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import testQueryRouter from './testQueryRouter.js';
+import usersRouter from './usersRouter.js';
+import genericError from './middlewares/genericError.js';
 
 const server = express();
 
 const port = 3001;
 
+server.use(genericError);
+
 dotenv.config();
 
-server.use("/testquery", testQueryRouter);
+server.use("/users", usersRouter);
 
 mongoose
     .connect(process.env.MONGO_URL)
